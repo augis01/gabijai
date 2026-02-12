@@ -14,7 +14,6 @@ body {
     overflow: hidden;
 }
 
-/* Centravimas */
 .center-wrapper {
     position: absolute;
     top: 50%;
@@ -23,65 +22,17 @@ body {
     text-align: center;
 }
 
-h1 {
-    font-size: 40px;
-    color: white;
-}
+h1 { font-size: 40px; color: white; }
+img { width: 300px; margin: 20px 0; }
 
-img {
-    width: 300px;
-    margin: 20px 0;
-}
+.buttons { display: flex; justify-content: center; gap: 80px; margin-top: 20px; }
+.btn-wrapper { width: 200px; height: 80px; display: flex; justify-content: center; align-items: center; }
+button { padding: 15px 40px; font-size: 20px; border: none; border-radius: 10px; cursor: pointer; transition: transform 0.2s ease; }
+#yesBtn { background-color: #ff4d6d; color: white; }
+#noBtn { background-color: #444; color: white; }
 
-.buttons {
-    display: flex;
-    justify-content: center;
-    gap: 80px;
-    margin-top: 20px;
-}
-
-.btn-wrapper {
-    width: 200px;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-button {
-    padding: 15px 40px;
-    font-size: 20px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-#yesBtn {
-    background-color: #ff4d6d;
-    color: white;
-}
-
-#noBtn {
-    background-color: #444;
-    color: white;
-}
-
-/* Širdutės */
-.heart {
-    position: fixed;
-    top: -20px;
-    color: red;
-    pointer-events: none;
-    animation: fall linear forwards;
-}
-
-@keyframes fall {
-    to {
-        transform: translateY(110vh);
-        opacity: 0;
-    }
-}
+.heart { position: fixed; top: -20px; color: red; pointer-events: none; animation: fall linear forwards; }
+@keyframes fall { to { transform: translateY(110vh); opacity: 0; } }
 </style>
 </head>
 
@@ -90,7 +41,6 @@ button {
 <div id="mainContent" class="center-wrapper">
     <h1>Labas mano pupsikai, ar busi mano valentine?</h1>
     <img src="mygif.gif" alt="gif">
-
     <div class="buttons">
         <div class="btn-wrapper">
             <button id="yesBtn">YES</button>
@@ -108,40 +58,25 @@ let yesBtn = document.getElementById("yesBtn");
 let noScale = 1;
 let yesScale = 1;
 
-const webhookURL = "https://discord.com/api/webhooks/1471517813884846294/KkcPPqk1IhxeeFL2Ge6sT6N-I6OtwAFeeJ15u3VLGtFwcpscG1R2QlBG2kpgjMt79Mqq";
+// ČIA bus tavo Vercel funkcijos URL
+const webhookProxyURL = "TAVO_VERCEL_FUNCTION_URL";
 
 noBtn.addEventListener("click", function() {
     noScale /= 2;
     yesScale *= 2;
-
     noBtn.style.transform = "scale(" + noScale + ")";
     yesBtn.style.transform = "scale(" + yesScale + ")";
 });
 
 yesBtn.addEventListener("click", function() {
+    // siunčia į Vercel backend
+    fetch(webhookProxyURL, { method: "POST" });
 
-    // Webhook (veiks GitHub Pages)
-    fetch(webhookURL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            content: "💘 KAŽKAS PASPAUDĖ YES VALENTINE WEBSITEEEE 💘"
-        })
-    });
-
-    // Pakeičiam turinį
+    // pakeičia turinį
     document.getElementById("mainContent").innerHTML = `
-        <h1 style="color:white; font-size:50px;">
-            I LUV U BABYYYY❤❤❤❤❤❤❤
-        </h1>
-        <h2 style="color:white; margin-top:20px;">
-            -ur chilly🌶
-        </h2>
+        <h1 style="color:white; font-size:50px;">I LUV U BABYYYY❤❤❤❤❤❤❤</h1>
+        <h2 style="color:white; margin-top:20px;">-ur chilly🌶</h2>
     `;
-
     startHearts();
 });
 
@@ -150,13 +85,10 @@ function startHearts() {
         const heart = document.createElement("div");
         heart.classList.add("heart");
         heart.innerHTML = "❤";
-
         heart.style.left = Math.random() * 100 + "vw";
         heart.style.fontSize = (20 + Math.random() * 30) + "px";
         heart.style.animationDuration = (2 + Math.random() * 3) + "s";
-
         document.body.appendChild(heart);
-
         setTimeout(() => heart.remove(), 5000);
     }, 200);
 }
@@ -164,4 +96,3 @@ function startHearts() {
 
 </body>
 </html>
-
