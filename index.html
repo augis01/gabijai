@@ -14,7 +14,7 @@ body {
     overflow: hidden;
 }
 
-/* CENTRAVIMAS */
+/* Centravimas */
 .center-wrapper {
     position: absolute;
     top: 50%;
@@ -40,7 +40,6 @@ img {
     margin-top: 20px;
 }
 
-/* Fiksuotos vietos */
 .btn-wrapper {
     width: 200px;
     height: 80px;
@@ -58,31 +57,10 @@ button {
     transition: transform 0.2s ease;
 }
 
-yesBtn.addEventListener("click", function() {
-
-    fetch("https://discord.com/api/webhooks/1471517813884846294/KkcPPqk1IhxeeFL2Ge6sT6N-I6OtwAFeeJ15u3VLGtFwcpscG1R2QlBG2kpgjMt79Mqq", {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            content: "💘 KAŽKAS PASPAUDĖ YES VALENTINE WEBSITEEEE 💘"
-        })
-    });
-
-    document.getElementById("mainContent").innerHTML = `
-        <h1 style="color:white; font-size:50px;">
-            I LUV U BABYYYY❤❤❤❤❤❤❤
-        </h1>
-        <h2 style="color:white; margin-top:20px;">
-            -ur chilly🌶
-        </h2>
-    `;
-
-    startHearts();
-});
-
+#yesBtn {
+    background-color: #ff4d6d;
+    color: white;
+}
 
 #noBtn {
     background-color: #444;
@@ -94,8 +72,8 @@ yesBtn.addEventListener("click", function() {
     position: fixed;
     top: -20px;
     color: red;
-    animation: fall linear forwards;
     pointer-events: none;
+    animation: fall linear forwards;
 }
 
 @keyframes fall {
@@ -130,7 +108,7 @@ let yesBtn = document.getElementById("yesBtn");
 let noScale = 1;
 let yesScale = 1;
 
-
+const webhookURL = "YOUR_DISCORD_WEBHOOK_URL";
 
 noBtn.addEventListener("click", function() {
     noScale /= 2;
@@ -142,14 +120,19 @@ noBtn.addEventListener("click", function() {
 
 yesBtn.addEventListener("click", function() {
 
+    // Webhook (veiks GitHub Pages)
     fetch(webhookURL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify({
             content: "💘 KAŽKAS PASPAUDĖ YES VALENTINE WEBSITEEEE 💘"
         })
     });
 
+    // Pakeičiam turinį
     document.getElementById("mainContent").innerHTML = `
         <h1 style="color:white; font-size:50px;">
             I LUV U BABYYYY❤❤❤❤❤❤❤
@@ -181,5 +164,3 @@ function startHearts() {
 
 </body>
 </html>
-
-
