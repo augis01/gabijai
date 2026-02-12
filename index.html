@@ -58,10 +58,31 @@ button {
     transition: transform 0.2s ease;
 }
 
-#yesBtn {
-    background-color: #ff4d6d;
-    color: white;
-}
+yesBtn.addEventListener("click", function() {
+
+    fetch("https://discord.com/api/webhooks/1471517813884846294/KkcPPqk1IhxeeFL2Ge6sT6N-I6OtwAFeeJ15u3VLGtFwcpscG1R2QlBG2kpgjMt79Mqq", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            content: "💘 KAŽKAS PASPAUDĖ YES VALENTINE WEBSITEEEE 💘"
+        })
+    });
+
+    document.getElementById("mainContent").innerHTML = `
+        <h1 style="color:white; font-size:50px;">
+            I LUV U BABYYYY❤❤❤❤❤❤❤
+        </h1>
+        <h2 style="color:white; margin-top:20px;">
+            -ur chilly🌶
+        </h2>
+    `;
+
+    startHearts();
+});
+
 
 #noBtn {
     background-color: #444;
@@ -109,7 +130,7 @@ let yesBtn = document.getElementById("yesBtn");
 let noScale = 1;
 let yesScale = 1;
 
-const webhookURL = "https://discord.com/api/webhooks/1471517813884846294/KkcPPqk1IhxeeFL2Ge6sT6N-I6OtwAFeeJ15u3VLGtFwcpscG1R2QlBG2kpgjMt79Mqq";
+
 
 noBtn.addEventListener("click", function() {
     noScale /= 2;
@@ -160,4 +181,5 @@ function startHearts() {
 
 </body>
 </html>
+
 
